@@ -3,12 +3,13 @@ import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const onlineStatus = useOnlineStatus();
   const [btnName, setBtnName] = useState("Login");
   const user = useContext(UserContext);
-  console.log(user)
+
   const handleBtnName = () => {
     btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
   };
@@ -24,10 +25,12 @@ const Header = () => {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "Contact Us", href: "contact-us" },
-    { name: "cart", href: "/cart" },
+    // { name: "cart", href: "/cart" },
     { name: "Grcocery", href: "grocery" },
   ];
 
+  // Subscribing to the store using an Selector.
+  const cartItems = useSelector((store) => store.cart.items);
   return (
     <header className="bg-white">
       <nav
@@ -49,12 +52,23 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
+            <Link
+                key="cart"
+                to="/cart"
+                className="text-sm/6 font-semibold text-gray-900"
+              >
+                Cart ({cartItems.length} items)
+              </Link>
             <a href="#">{user.loggedInUser}</a>
           </div>
         </div>
         <div className="hidden lg:flex">
-          <button onClick={handleBtnName} className="text-sm/6 font-semibold text-gray-900">
-            {onlineStatus ? "✅" : "🟥"} {btnName} <span aria-hidden="true">&rarr;</span>
+          <button
+            onClick={handleBtnName}
+            className="text-sm/6 font-semibold text-gray-900"
+          >
+            {onlineStatus ? "✅" : "🟥"} {btnName}{" "}
+            <span aria-hidden="true">&rarr;</span>
           </button>
         </div>
       </nav>

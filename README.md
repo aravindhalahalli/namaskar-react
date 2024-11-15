@@ -84,6 +84,5 @@ Index.html / about.html / contactus.html => makes every click on link make reque
  - Read the data using Selectors
 
 https://medium.com/@sohammehta56/javascript-interesting-output-based-interview-questions-38682c0b64fe
-
-
+https://medium.com/@sohammehta56/javascript-interesting-output-based-interview-questions-38682c0b64fe
 
